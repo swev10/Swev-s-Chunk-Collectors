@@ -1,0 +1,76 @@
+name: SwevsChunkCollector
+version: '1.0'
+main: com.swevmc.SwevsChunkCollector
+api-version: '1.21'
+author: SwevMC
+description: An optimized chunk collector plugin with holograms and GUI
+website: https://github.com/SwevMC/SwevsChunkCollector
+
+depend: [Vault]
+softdepend: [ShopGUIPlus, EconomyShopGUI, EconomyShopGUI-Premium, FancyHolograms, DecentHolograms, HolographicDisplays]
+
+commands:
+  chunkcollector:
+    description: Main command for chunk collector management
+    aliases: [cc, collector]
+    usage: /<command> [give|reload|help|info]
+    permission: chunkcollector.admin
+
+permissions:
+  chunkcollector.*:
+    description: All chunk collector permissions
+    children:
+      chunkcollector.admin: true
+      chunkcollector.give: true
+      chunkcollector.use: true
+      chunkcollector.bypass: true
+  
+  chunkcollector.admin:
+    description: Admin permissions for chunk collector
+    children:
+      chunkcollector.give: true
+      chunkcollector.use: true
+      chunkcollector.bypass: true
+  
+  chunkcollector.give:
+    description: Permission to give chunk collectors
+    default: op
+  
+  chunkcollector.use:
+    description: Permission to use chunk collectors
+    default: true
+  
+  chunkcollector.bypass:
+    description: Bypass collector limits
+    default: op
+  
+  chunkcollectors.recharge.1:
+    description: Default recharge limit (1 hour)
+    default: true
+  chunkcollectors.recharge.2:
+    description: VIP rank - 2 recharges (2 hours)
+    default: false
+  chunkcollectors.recharge.3:
+    description: VIP+ rank - 3 recharges (3 hours)
+    default: false
+  chunkcollectors.recharge.4:
+    description: MVP rank - 4 recharges (4 hours)
+    default: false
+  chunkcollectors.recharge.5:
+    description: MVP+ rank - 5 recharges (5 hours)
+    default: false
+  chunkcollectors.recharge.6:
+    description: Elite rank - 6 recharges (6 hours)
+    default: false
+  chunkcollectors.recharge.7:
+    description: Elite+ rank - 7 recharges (7 hours)
+    default: false
+  chunkcollectors.recharge.8:
+    description: Legend rank - 8 recharges (8 hours)
+    default: false
+  chunkcollectors.recharge.9:
+    description: Legend+ rank - 9 recharges (9 hours)
+    default: false
+  chunkcollectors.recharge.10:
+    description: Mythic rank - 10 recharges (10 hours)
+    default: false

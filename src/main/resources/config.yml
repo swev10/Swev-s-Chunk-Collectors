@@ -1,0 +1,255 @@
+# SwevsChunkCollector Configuration
+# Plugin version: 1.0
+
+
+# Plugin Settings
+settings:
+  # Collection speed in ticks (20 ticks = 1 second)
+  collection-speed: 20
+  
+  # Collection effect cooldown in milliseconds (prevents spam)
+  collection-effect-cooldown: 100
+  
+  # Happy villager particle frequency in ticks (60 ticks = 3 seconds)
+  happy-villager-particle-frequency: 60
+  
+  # Maximum height for collection (set to 319 for above ground)
+  max-collection-height: 319
+  
+  # Minimum height for collection (set to -64 for below ground)
+  min-collection-height: -64
+  
+  # Maximum collectors per player
+  max-collectors-per-player: 10
+  
+  # Default charge time in minutes (0 = no charge, must be recharged)
+  default-charge-minutes: 60
+  
+  # Recharge cost per minute (1 hour = 60 minutes)
+  recharge-cost-per-minute: 100.0
+  
+  # Autosell interval in seconds (how often items are automatically sold)
+  autosell-interval: 60
+
+  # Hologram Provider
+  # Options: "AUTO", "FANCY", "DECENT", "HD"
+  # AUTO: Automatically detect the best available provider
+  # FANCY: Use FancyHolograms
+  # DECENT: Use DecentHolograms
+  # HD: Use HolographicDisplays
+  hologram-provider: "AUTO"
+
+# Storage Configuration
+storage:
+  # Storage type: "FILE", "MYSQL", or "REDIS"
+  # For easy setup, change to "MYSQL" if you have a MySQL server
+  type: "FILE"
+  
+  # MySQL configuration (only used if type is MYSQL)
+  mysql:
+    # MySQL host
+    host: "localhost"
+    
+    # MySQL port
+    port: 3306
+    
+    # Database name
+    database: "chunkcollectors"
+    
+    # Username
+    username: "root"
+    
+    # Password
+    password: ""
+    
+    # Use SSL connection
+    use-ssl: false
+  
+  # Redis configuration (only used if type is REDIS)
+  redis:
+    # Redis host
+    host: "localhost"
+    
+    # Redis port
+    port: 6379
+    
+    # Redis password (leave empty if no password)
+    password: ""
+    
+    # Redis database number (0-15)
+    database: 0
+    
+    # Use SSL connection
+    use-ssl: false
+
+# Block Configuration
+block:
+  # Block type to use for collectors
+  # Options: "BEACON"
+  type: "BEACON"
+
+# Messages
+messages:
+  prefix: "#FFD700[ChunkCollector] &r"  # Gold hex color example
+  
+  # General messages
+  no-permission: "&cYou don't have permission to use this command!"
+  player-only: "&cThis command can only be used by players!"
+  invalid-amount: "&cPlease enter a valid amount!"
+  not-enough-money: "&cYou don't have enough money! You need &a${cost}&c but only have &a${balance}&c."
+  
+  # Collector messages
+  collector-placed: "&aChunk collector placed successfully!"
+  collector-removed: "&aChunk collector removed!"
+  collector-already-exists: "&cThere's already a chunk collector in this chunk!"
+  collector-not-found: "&cNo chunk collector found in this chunk!"
+  collector-not-yours: "&cThis chunk collector doesn't belong to you!"
+  collector-given: "&aYou have been given &6${amount} &achunk collector(s)!"
+  collector-received: "&aYou received &6${amount} &achunk collector(s) from &6${player}&a!"
+  collector-recharged: "&aChunk collector recharged successfully!"
+  collector-refilled: "&aCollector refilled successfully! Cost: &a${cost}"
+  insufficient-funds: "&cInsufficient funds! Cost: &a${cost}"
+  autosell-complete: "&aSold collected items for &6$${amount}&a!"
+  
+  # GUI messages
+  gui-title: "&6Chunk Collector"
+  gui-recharge-cost: "&7Recharge Cost: &a$${cost}"
+  gui-time-remaining: "&7Time Remaining: &e${time}"
+  gui-items-collected: "&7Items Collected: &a${amount}"
+  gui-money-earned: "&7Money Earned: &a$${amount}"
+  gui-recharge-button: "&aRecharge Collector"
+  gui-collector-info: "&6Chunk Collector Info"
+  
+  # Rank system messages
+  max-recharge-reached: "&cPurchase a rank to have longer recharge times!"
+  recharge-limit-info: "&7You have reached your maximum recharge limit: &e${current}/${max}"
+  max-collectors-reached: "&cYou have reached the maximum number of collectors! Max: &a${max}"
+  available-ranks: "&7Available ranks:"
+  rank-info: "&7- &6${rank} &7(${recharges} recharges): &a${permission}"
+
+# Permission System
+# The following permissions control collector limits:
+# - chunkcollectors.max.1 to chunkcollectors.max.100: Sets max collectors to that number
+# - chunkcollectors.max.unlimited: Allows unlimited collectors
+# - chunkcollector.admin: Admin commands
+# - chunkcollector.give: Give collectors to players
+# - chunkcollector.reload: Reload configuration
+# - chunkcollector.use: Use chunk collectors
+# - chunkcollector.bypass: Bypass all limits
+
+# Collectible Items
+# Items that can be collected by the chunk collector
+# Note: Only naturally dropped items are collected (not items dropped by players)
+collectible-items:
+  # Crops
+  - "WHEAT"
+  - "CARROT"
+  - "POTATO"
+  - "BEETROOT"
+  - "NETHER_WART"
+  - "COCOA_BEANS"
+  - "MELON_SLICE"
+  - "PUMPKIN"
+  - "SUGAR_CANE"
+  - "BAMBOO"
+  - "CACTUS"
+  
+  # Drops from mobs
+  - "ROTTEN_FLESH"
+  - "BONE"
+  - "STRING"
+  - "SPIDER_EYE"
+  - "GUNPOWDER"
+  - "BLAZE_ROD"
+  - "GHAST_TEAR"
+  - "ENDER_PEARL"
+  - "SLIME_BALL"
+  - "MAGMA_CREAM"
+  - "LEATHER"
+  - "FEATHER"
+  
+  # Wood and logs
+  - "OAK_LOG"
+  
+  # Stone and minerals
+  - "COBBLESTONE"
+
+# Hologram Configuration
+hologram:
+  # Hologram lines (supports hex colors with &#RRGGBB and color codes)
+  lines:
+    - "#B7D9F5&lCHUNK COLLECTOR"
+    - "&7ᴀᴍᴏᴜɴᴛ ᴍᴀᴅᴇ: &a${amount}"
+    - "&r"  # Empty line
+    - "&7ᴏᴡɴᴇʀ: &e${owner}"
+    - "&7ʀᴇᴍᴀɪɴɪɴɢ ᴄʜᴀʀɢᴇ: &e${time}"
+    - "&7Battery: ${battery}"
+
+
+  hologram-title: "#B7D9F5&lCHUNK COLLECTOR"
+  hologram-amount: "&7ᴀᴍᴏᴜɴᴛ ᴍᴀᴅᴇ: &a${amount}"
+  hologram-owner: "&7ᴏᴡɴᴇʀ: &e${owner}"
+  hologram-charge: "&7ʀᴇᴍᴀɪɴɪɴɢ ᴄʜᴀʀɢᴇ: &e${time}"
+  hologram-empty-line: "&r"
+  # Hologram height offset from collector block (adjustable - higher = more space above)
+  height-offset: 1.0
+  
+  # Update interval in ticks (20 ticks = 1 second)
+  update-interval: 20
+
+  # Hologram background color (Only for FancyHolograms)
+  # Options: "TRANSPARENT", "RED", "BLUE", etc. or hex "#RRGGBB"
+  # Default: TRANSPARENT
+  background: "TRANSPARENT"
+
+# Sounds
+sounds:
+  # Sound when collector is placed
+  collector-place: "BLOCK_ANVIL_PLACE"
+  
+  # Sound when collector is removed
+  collector-remove: "BLOCK_ANVIL_BREAK"
+  
+  # Sound when collector collects an item
+  item-collect: "ENTITY_ITEM_PICKUP"
+  
+  # Sound when collector is recharged
+  collector-recharge: "BLOCK_ENCHANTMENT_TABLE_USE"
+  
+  # Sound when GUI is opened
+  gui-open: "UI_BUTTON_CLICK"
+  
+  # Sound when collector runs out of charge
+  collector-depleted: "BLOCK_NOTE_BLOCK_BASS"
+
+# Visual Effects
+effects:
+  # Particle effect when collector is placed
+  collector-place-particle: "VILLAGER_HAPPY"
+  
+  # Particle effect when collector collects an item
+  item-collect-particle: "EXPLOSION"
+  
+  # Particle effect when collector is recharged
+  collector-recharge-particle: "ENCHANT"
+  
+  # Particle effect when collector runs out of charge
+  collector-depleted-particle: "SMOKE"
+  
+  # Particle effect when collector is broken
+  collector-break-particle: "EXPLOSION"
+
+# Economy Plugin Integration for Autosell Pricing
+economy:
+  # Which economy plugin to use for item pricing
+  # Options: "SHOPGUIPLUS", "ECONOMYSHOPGUI", "ECONOMYSHOPGUIPREMIUM", "CUSTOM"
+  plugin: "SHOPGUIPLUS"
+  
+  # Fallback price if item is not found in economy plugin (in dollars per item)
+  fallback-price: 1.0
+  
+  # Price multiplier (multiply economy plugin price by this value)
+  # 1.0 = same price, 0.5 = half price, 2.0 = double price
+  price-multiplier: 1.0
+
+  prices: {}
